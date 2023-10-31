@@ -1,4 +1,4 @@
-const Persons({filteredPersons})=>{
+const Persons=({filteredPersons})=>{
     return(
         <>
         <h2>Numbers</h2>
