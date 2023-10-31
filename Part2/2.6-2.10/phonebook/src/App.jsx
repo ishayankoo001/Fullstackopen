@@ -4,6 +4,7 @@ import PersonForm from './PersonForm'
 import Persons from './Persons'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
+import personServices from './services/persons'
 const App = () => {
   const [persons, setPersons] = useState([])
   useEffect(() => {
@@ -33,7 +34,7 @@ const App = () => {
       return
     }
     setPersons(persons.concat({ name: newName, number: newNumber }))
-    axios.post('http://localhost:3001/persons', { name: newName, number: newNumber })
+    personServices.create({ name: newName, number: newNumber })
     setNewName('')
     setNewNumber('')
   }
