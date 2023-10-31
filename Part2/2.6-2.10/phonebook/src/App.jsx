@@ -12,6 +12,9 @@ const App = () => {
       setPersons(response.data)
     })
   },[])
+  const handleDelete = () => {
+    console.log('delete')
+  }
 
 
   const handleInputChange = (event) => {
@@ -26,6 +29,14 @@ const App = () => {
     console.log(event.target.value)
     setNewNumber(event.target.value)
   }
+  const handleDeleteOf = (id) => {
+    const person = persons.find((person) => person.id === id)
+    if (window.confirm(`Delete ${person.name}?`)) {
+      personServices.deletePerson(id)
+      setPersons(persons.filter((person) => person.id !== id))
+    }
+  }
+
   const handleNameChange = (event) => {
     event.preventDefault()
     console.log(newName)
@@ -48,7 +59,7 @@ const App = () => {
       <h2>Phonebook</h2>
       <Filter filter={newFilter} handleFilterChange={handleFilterChange} />
       <PersonForm newName={newName} handleInputChange={handleInputChange} newNumber={newNumber} handleNumberInputChange={handleNumberInputChange} handleNameChange={handleNameChange} />
-      <Persons filteredPersons={filteredPersons} />
+      <Persons filteredPersons={filteredPersons} handleDelete={handleDelete}  handleDeleteOf={handleDeleteOf}/>
     </div>
   )
 }
